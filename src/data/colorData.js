@@ -1,0 +1,18 @@
+export const colorData = [
+  { color: "#BA4949" },
+  { color: "#38858A" },
+  { color: "#397097" },
+  { color: "#A4893C" },
+  { color: "#A44C3D" },
+  { color: "#7D53A2" },
+  { color: "#AF4E91" },
+  { color: "#518A58" },
+  { color: "#545764" },
+  { color: "#A4A4A4" },
+  { color: "#A4A4A4" },
+  { color: "#B4B4B5" },
+  { color: "#F2B1B1" },
+  { color: "#B1D2F2" },
+  { color: "#B1C2F2" },
+  { color: "#BA4949" },
+];
