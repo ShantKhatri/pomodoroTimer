@@ -3,11 +3,12 @@ import { StyleSheet, Text, Modal, TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function Duration() {
+export default function Duration(props) {
   const [pomodoro, setPomodoro] = useState(25);
   const [breakTime, setBreakTime] = useState(5);
   const [longBreak, setLongBreak] = useState(15);
   const [modalVisible, setModalVisible] = useState(false);
+  const [mode, setMode] = useState([pomodoro, breakTime, longBreak]);
   return (
     <View style={styles.container}>
       <Modal
@@ -31,7 +32,13 @@ export default function Duration() {
           </TouchableOpacity>
         </View>
         <View style={styles.checkIconContainer}>
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible(false);
+              setMode([pomodoro, breakTime, longBreak]);
+              props.onDurationChange(mode);
+            }}
+          >
             <AntDesign name="checkcircle" size={50} color="black" />
           </TouchableOpacity>
         </View>

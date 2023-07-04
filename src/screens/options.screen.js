@@ -13,6 +13,7 @@ import ColorTheme from "../components/colorThemes.component";
 
 export default function OptionsScreen({ route, navigation }) {
   const [color, setColor] = useState("#F2B1B1");
+  const [mode, setMode] = useState([25, 5, 15]);
   //   console.log(route.params);
   //   const obj = { name: "Sahil", age: 20 };
   //   const outerObj = { ...obj, city: "Delhi" };
@@ -20,14 +21,21 @@ export default function OptionsScreen({ route, navigation }) {
     <SafeAreaView style={{ ...styles.container, backgroundColor: color }}>
       <View style={styles.headerContainer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Main", { color })}
+          onPress={() => navigation.navigate("Main", { color, mode })}
         >
           <AntDesign name="left" size={24} color="black" />
         </TouchableOpacity>
       </View>
       <View style={styles.durationContainer}>
         <Text>DURETION</Text>
-        <Duration style={styles.timerContainer} />
+        <Duration
+          onDurationChange={(mode) => {
+            console.log("Duration Changed");
+            console.log(mode);
+            setMode(mode);
+          }}
+          style={styles.timerContainer}
+        />
       </View>
       <View style={styles.durationContainer}>
         <Text>COLOR THEME</Text>

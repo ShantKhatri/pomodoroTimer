@@ -9,13 +9,18 @@ import { NavigationContainer } from "@react-navigation/native";
 export default function HomeScreen({ route, navigation }) {
   const [color, setColor] = useState("");
   const [time, setTime] = useState(40);
+  const mode = route.params;
+  console.log(mode);
   //   {
   //     route.params.color ? setColor(route.params?.color) : setColor("#F2B1B1");
   //   }
   return (
     <View style={{ ...styles.container, backgroundColor: route.params?.color }}>
       <View style={styles.options}>
-        <TouchableOpacity onPress={() => navigation.navigate("Options")}>
+        <TouchableOpacity
+          style={{ paddingRight: 20 }}
+          onPress={() => navigation.navigate("Options")}
+        >
           <Ionicons name="options" size={24} color="black" />
         </TouchableOpacity>
       </View>
@@ -60,9 +65,10 @@ const styles = StyleSheet.create({
   },
   options: {
     alignItems: "flex-end",
-    // position: "absolute",
-    backgroundColor: "red",
+    position: "absolute",
+    // backgroundColor: "red",
     marginTop: 50,
+    width: "100%",
   },
   timerText: {
     fontSize: 100,
