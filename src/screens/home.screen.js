@@ -9,11 +9,10 @@ import { NavigationContainer } from "@react-navigation/native";
 export default function HomeScreen({ route, navigation }) {
   const [color, setColor] = useState("");
   const [time, setTime] = useState(40);
-  const mode = route.params;
+  const mode = [25, 5, 15];
   console.log(mode);
-  //   {
-  //     route.params.color ? setColor(route.params?.color) : setColor("#F2B1B1");
-  //   }
+  const [modeIndex, setModeIndex] = useState(0);
+
   return (
     <View style={{ ...styles.container, backgroundColor: route.params?.color }}>
       <View style={styles.options}>
@@ -27,7 +26,7 @@ export default function HomeScreen({ route, navigation }) {
       <View style={styles.timerContainer}></View>
       <CountdownCircleTimer
         isPlaying
-        duration={time}
+        duration={time * 60}
         colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
         colorsTime={[time, time / 2, 2, 0]}
         isSmoothColorTransition={true}
@@ -46,6 +45,41 @@ export default function HomeScreen({ route, navigation }) {
           <Text style={styles.timerText}>{remainingTime}</Text>
         )}
       </CountdownCircleTimer>
+      <View style={styles.modeConatiner}>
+        <View style={styles.modeNavigator}>
+          <TouchableOpacity
+            onPress={() => {
+              setModeIndex((modeIndex + 1) % 3);
+              setTime(mode[modeIndex]);
+            }}
+          >
+            <AntDesign name="stepbackward" size={30} color="black" />
+          </TouchableOpacity>
+        </View>
+        {modeIndex == 2 ? (
+          <Text style={{ fontSize: 20 }}>
+            Long Break Mode {`\n\t\t\t`} Time:{mode[modeIndex]}
+          </Text>
+        ) : modeIndex == 1 ? (
+          <Text style={{ fontSize: 20 }}>
+            Short Break Mode {`\n\t\t\t`} Time:{mode[modeIndex]}
+          </Text>
+        ) : (
+          <Text style={{ fontSize: 20 }}>
+            Focus Mode {`\n\t\t\t`} Time:{mode[modeIndex]}
+          </Text>
+        )}
+        <View style={styles.modeNavigator}>
+          <TouchableOpacity
+            onPress={() => {
+              setModeIndex((modeIndex + 1) % 3);
+              setTime(mode[modeIndex]);
+            }}
+          >
+            <AntDesign name="stepforward" size={30} color="black" />
+          </TouchableOpacity>
+        </View>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -72,5 +106,21 @@ const styles = StyleSheet.create({
   },
   timerText: {
     fontSize: 100,
+  },
+  modeConatiner: {
+    // backgroundColor: "red",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    width: "100%",
+    marginTop: 100,
+  },
+  modeNavigator: {
+    // backgroundColor: "green",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 30,
+    height: 50,
+    width: 50,
   },
 });
